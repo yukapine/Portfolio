@@ -8,6 +8,7 @@
 
 //import { PortfolioCarousel } from './portfolio-carousel.js';
 
+
 window.onload = function () {
     const renderer = new THREE.WebGLRenderer({
         canvas: document.getElementById('three-canvas'),
@@ -551,43 +552,46 @@ window.onresize = function () {
     renderer.setSize( w, h );
 };
 
-window.onmousemove = function (evt) { 
-    const ray = raycaster.setFromCamera( mouse, camera );
-    spheres.forEach((sphere) => {
-        sphere.handleInnerOrbHover();
-    });
-    
-    mouse.x = (evt.pageX / window.innerWidth) * 2 - 1;
-    mouse.y = -(evt.pageY / window.innerHeight) * 2 + 1;
-}
+document.addEventListener("DOMContentLoaded", function() {
 
-window.onmousedown = function (evt) { 
-    if (evt.button == 0)
-        click = true;
+    window.onmousemove = function (evt) { 
+        const ray = raycaster.setFromCamera( mouse, camera );
+        spheres.forEach((sphere) => {
+            sphere.handleInnerOrbHover();
+        });
+        
+        mouse.x = (evt.pageX / window.innerWidth) * 2 - 1;
+        mouse.y = -(evt.pageY / window.innerHeight) * 2 + 1;
+    }
 
-}
+    window.onmousedown = function (evt) { 
+        if (evt.button == 0)
+            click = true;
 
-window.onmouseup = function(evt) {
-    if (evt.button === 0) {
+    }
+
+    window.onmouseup = function(evt) {
+        if (evt.button === 0) {
+            click = false;
+            // Reset selected particles for all spheres
+            spheres.forEach(sphere => {
+                sphere.selectedParticle = undefined;
+            });
+        }
+        spheres.forEach(sphere => {
+            sphere.cleanup();
+        });
+    };
+
+    window.onmouseout = function(evt) {
         click = false;
-        // Reset selected particles for all spheres
         spheres.forEach(sphere => {
             sphere.selectedParticle = undefined;
+            sphere.cleanup();
+            
         });
-    }
-    spheres.forEach(sphere => {
-        sphere.cleanup();
-    });
-};
-
-window.onmouseout = function(evt) {
-    click = false;
-    spheres.forEach(sphere => {
-        sphere.selectedParticle = undefined;
-        sphere.cleanup();
-        
-    });
-};
+    };
+});
 
 function update() {
     requestAnimationFrame(update);
