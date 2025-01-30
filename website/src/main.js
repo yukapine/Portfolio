@@ -8,7 +8,8 @@
 
 //import { PortfolioCarousel } from './portfolio-carousel.js';
 
-
+var raycaster = new THREE.Raycaster();
+const spheres = [];
 window.onload = function () {
     const renderer = new THREE.WebGLRenderer({
         canvas: document.getElementById('three-canvas'),
@@ -53,7 +54,7 @@ window.onload = function () {
     var mouse = new THREE.Vector2( 0.5, 0.5 );
     var tmpmouse = new THREE.Vector3();
     var mouse3d = new THREE.Vector3( 0, 0, 0 );
-    var raycaster = new THREE.Raycaster();
+    //var raycaster = new THREE.Raycaster();
 
     var hoveredObjects = [];
 
@@ -131,7 +132,7 @@ window.onload = function () {
 
     new ContentManager();
 
-    let spheres = [];
+    
     const positions = [
         //new THREE.Vector3(-400, 0, 0),
         new THREE.Vector3(-125, 0, 0),
