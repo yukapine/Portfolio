@@ -15,118 +15,147 @@ window.onload = function () {
         alpha: true
 
     });
+
+
+    let aspect = window.innerWidth / window.innerHeight;
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setPixelRatio( window.devicePixelRatio );
+
+    //document.body.appendChild( renderer.domElement );
+
+    var scene = new THREE.Scene();
+    renderer.setClearColor( 0xFFFFFF );
+
+    const frustumSize = 600; 
+    const camera = new THREE.OrthographicCamera(
+        (-frustumSize * aspect) / 2, 
+        (frustumSize * aspect) / 2,  
+        frustumSize / 2,             
+        -frustumSize / 2,           
+        1,                           
+        10000                       
+    );
+    camera.position.z = 600;
+    camera.position.y = -0;
+    camera.position.x = 0;
+
+    var height = 100;
+    var width = height;
+    var dim = 200;
+
+    var restDistance = dim/height;
+    var diagonalDist = Math.sqrt(restDistance * restDistance * 2);
+    var bigDist = Math.sqrt( restDistance * restDistance * 4 );
+
+    var click = false;
+    var mouse = new THREE.Vector2( 0.5, 0.5 );
+    var tmpmouse = new THREE.Vector3();
+    var mouse3d = new THREE.Vector3( 0, 0, 0 );
+    var raycaster = new THREE.Raycaster();
+
+    var hoveredObjects = [];
+
+    // LIGHTING
+
+    var directionalLight = new THREE.DirectionalLight( 0xba8bb8, 2.5 );
+    directionalLight.position.set( 1, 1, 1 );
+    scene.add( directionalLight );
+
+    var directionalLight2 = new THREE.DirectionalLight( 0x8bbab4, 2.5 );
+    directionalLight2.position.set( 1, 1, -1 );
+    scene.add( directionalLight2 )
+
+    var light = new THREE.AmbientLight( 0x999999 ); // soft white light
+    scene.add( light );
+    var plight = new THREE.PointLight( 0xffffff, 1.0, 700 );
+    plight.position.set( 0, 350, 0 );
+    scene.add( plight );
+
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+
+    const outlinePass = new OutlinePass( new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera );
+
+    outlinePass.edgeStrength = 80; // Adjust outline strength
+    outlinePass.edgeGlow = 10; // Glow effect
+    outlinePass.edgeThickness = 5; // Thickness of the outline
+    outlinePass.pulsePeriod = 0; // Pulsing effect
+    outlinePass.visibleEdgeColor.set('#ffffff'); // Outline color
+    outlinePass.hiddenEdgeColor.set('#0000ff'); // Hidden edges color
+    outlinePass.selectedObjects;
+    composer.addPass(outlinePass);
+
+    const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);  
+    composer.addPass(gammaCorrectionPass);
+
+    // TEXTURES AND MATERIALS
+
+    var textureLoader = new THREE.TextureLoader();
+    var planeGeometry = new THREE.PlaneGeometry(1000, 1000);
+    var planeTexture = textureLoader.load("./Tile.png");
+    var planeMaterial = new THREE.MeshBasicMaterial({ map: planeTexture });
+
+    var voidPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+    voidPlane.rotation.x = -Math.PI / 2.8;
+    voidPlane.position.y = -200;
+    scene.add(voidPlane);
+
+    var maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
+    var texture1 = textureLoader.load( "./bubble_temp.png" );
+
+    texture1.anisotropy = maxAnisotropy;
+    texture1.repeat.x = 0.8;
+    texture1.offset.x = 0.1;
+    texture1.updateMatrix();
+
+    // PHYSICS
+
+    const amplitude = 2;
+    let step = 0;
+    const totalSteps = 480; // Complete cycle takes 120 steps
+    const stepSize = (Math.PI * 2) / totalSteps; // Size of each step in radians
+
+    var DRAG = 0.97;
+    var PULL = 4.5;
+
+    const defaultInnerOrbMaterial = new THREE.MeshPhongMaterial({
+        color: 0x000000,
+        shininess: 80,
+    });
+    const highlightInnerOrbMaterial = new THREE.MeshPhongMaterial({
+        color: 0x00f000,
+        shininess: 80,
+    });
+
+    new ContentManager();
+
+    let spheres = [];
+    const positions = [
+        //new THREE.Vector3(-400, 0, 0),
+        new THREE.Vector3(-125, 0, 0),
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(125, 0, 0)
+        //new THREE.Vector3(400, 0, 0),
+    ];
+
+    const links = [
+        "https://www.fabriohub.com/",
+        "https://www.fabriohub.com/",
+        "https://www.fabriohub.com/"
+    ];
+
+    const itemMeshPaths = [
+        'loafers.glb',
+        'pencil.glb',
+        'computer.glb'
+    ];
+
+    for (let i = 0; i < positions.length; i++) {
+        const sphere = new Bubble(i, scene, positions[i], links[i], itemMeshPaths[i]);
+        spheres.push(sphere);
+    }
 }
-
-let aspect = window.innerWidth / window.innerHeight;
-
-renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setPixelRatio( window.devicePixelRatio );
-
-//document.body.appendChild( renderer.domElement );
-
-var scene = new THREE.Scene();
-renderer.setClearColor( 0xFFFFFF );
-
-const frustumSize = 600; 
-const camera = new THREE.OrthographicCamera(
-    (-frustumSize * aspect) / 2, 
-    (frustumSize * aspect) / 2,  
-    frustumSize / 2,             
-    -frustumSize / 2,           
-    1,                           
-    10000                       
-);
-camera.position.z = 600;
-camera.position.y = -0;
-camera.position.x = 0;
-
-var height = 100;
-var width = height;
-var dim = 200;
-
-var restDistance = dim/height;
-var diagonalDist = Math.sqrt(restDistance * restDistance * 2);
-var bigDist = Math.sqrt( restDistance * restDistance * 4 );
-
-var click = false;
-var mouse = new THREE.Vector2( 0.5, 0.5 );
-var tmpmouse = new THREE.Vector3();
-var mouse3d = new THREE.Vector3( 0, 0, 0 );
-var raycaster = new THREE.Raycaster();
-
-var hoveredObjects = [];
-
-// LIGHTING
-
-var directionalLight = new THREE.DirectionalLight( 0xba8bb8, 2.5 );
-directionalLight.position.set( 1, 1, 1 );
-scene.add( directionalLight );
-
-var directionalLight2 = new THREE.DirectionalLight( 0x8bbab4, 2.5 );
-directionalLight2.position.set( 1, 1, -1 );
-scene.add( directionalLight2 )
-
-var light = new THREE.AmbientLight( 0x999999 ); // soft white light
-scene.add( light );
-var plight = new THREE.PointLight( 0xffffff, 1.0, 700 );
-plight.position.set( 0, 350, 0 );
-scene.add( plight );
-
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
-
-const outlinePass = new OutlinePass( new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera );
-
-outlinePass.edgeStrength = 80; // Adjust outline strength
-outlinePass.edgeGlow = 10; // Glow effect
-outlinePass.edgeThickness = 5; // Thickness of the outline
-outlinePass.pulsePeriod = 0; // Pulsing effect
-outlinePass.visibleEdgeColor.set('#ffffff'); // Outline color
-outlinePass.hiddenEdgeColor.set('#0000ff'); // Hidden edges color
-outlinePass.selectedObjects;
-composer.addPass(outlinePass);
-
-const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);  
-composer.addPass(gammaCorrectionPass);
-
-// TEXTURES AND MATERIALS
-
-var textureLoader = new THREE.TextureLoader();
-var planeGeometry = new THREE.PlaneGeometry(1000, 1000);
-var planeTexture = textureLoader.load("./Tile.png");
-var planeMaterial = new THREE.MeshBasicMaterial({ map: planeTexture });
-
-var voidPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-voidPlane.rotation.x = -Math.PI / 2.8;
-voidPlane.position.y = -200;
-scene.add(voidPlane);
-
-var maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
-var texture1 = textureLoader.load( "./bubble_temp.png" );
-
-texture1.anisotropy = maxAnisotropy;
-texture1.repeat.x = 0.8;
-texture1.offset.x = 0.1;
-texture1.updateMatrix();
-
-// PHYSICS
-
-const amplitude = 2;
-let step = 0;
-const totalSteps = 480; // Complete cycle takes 120 steps
-const stepSize = (Math.PI * 2) / totalSteps; // Size of each step in radians
-
-var DRAG = 0.97;
-var PULL = 4.5;
-
-const defaultInnerOrbMaterial = new THREE.MeshPhongMaterial({
-    color: 0x000000,
-    shininess: 80,
-});
-const highlightInnerOrbMaterial = new THREE.MeshPhongMaterial({
-    color: 0x00f000,
-    shininess: 80,
-});
 
 function Particle( x, y, z, mass ) {
 
@@ -228,7 +257,7 @@ class ContentManager {
 }
 
   
-new ContentManager();
+
 
 
 class Bubble {
@@ -510,33 +539,9 @@ class Bubble {
     }
 }
 
-let spheres = [];
-const positions = [
-    //new THREE.Vector3(-400, 0, 0),
-    new THREE.Vector3(-125, 0, 0),
-    new THREE.Vector3(0, 0, 0),
-    new THREE.Vector3(125, 0, 0)
-    //new THREE.Vector3(400, 0, 0),
-];
 
-const links = [
-    "https://www.fabriohub.com/",
-    "https://www.fabriohub.com/",
-    "https://www.fabriohub.com/"
-];
 
-const itemMeshPaths = [
-    'loafers.glb',
-    'pencil.glb',
-    'computer.glb'
-];
-
-for (let i = 0; i < positions.length; i++) {
-    const sphere = new Bubble(i, scene, positions[i], links[i], itemMeshPaths[i]);
-    spheres.push(sphere);
-}
-
-var debug = document.getElementById('debug');
+//var debug = document.getElementById('debug');
 
 window.onresize = function () {
     var w = window.innerWidth;
