@@ -544,15 +544,17 @@ class Bubble {
 
 //var debug = document.getElementById('debug');
 
-window.onresize = function () {
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize( w, h );
-};
 
-document.addEventListener("DOMContentLoaded", function() {
+
+window.onload = function () {
+
+    window.onresize = function () {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize( w, h );
+    };
 
     window.onmousemove = function (evt) { 
         const ray = raycaster.setFromCamera( mouse, camera );
@@ -591,7 +593,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
         });
     };
-});
+};
 
 function update() {
     requestAnimationFrame(update);
