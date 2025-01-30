@@ -170,7 +170,7 @@ function getIntersects(object) {
 }
 
 
-export class ContentManager {
+class ContentManager {
     constructor() {
       this.carousel = new window.PortfolioCarousel();
       this.threeScene = scene;
