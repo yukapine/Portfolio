@@ -1,4 +1,4 @@
-export class PortfolioCarousel {
+class PortfolioCarousel {
     constructor() {
       this.rotation = 180;
       this.isDragging = false;
@@ -109,3 +109,4 @@ export class PortfolioCarousel {
       }
     }
 }
+window.PortfolioCarousel = PortfolioCarousel;

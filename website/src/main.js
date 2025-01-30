@@ -6,7 +6,7 @@
 //import { GammaCorrectionShader } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/shaders/GammaCorrectionShader.js';
 //import { ShaderPass } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/postprocessing/ShaderPass.js';
 
-import { PortfolioCarousel } from './portfolio-carousel.js';
+//import { PortfolioCarousel } from './portfolio-carousel.js';
 
 const renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById('three-canvas'),
@@ -172,7 +172,7 @@ function getIntersects(object) {
 
 export class ContentManager {
     constructor() {
-      this.carousel = new PortfolioCarousel();
+      this.carousel = new window.PortfolioCarousel();
       this.threeScene = scene;
       this.currentSection = 'main';
       
