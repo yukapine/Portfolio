@@ -8,12 +8,14 @@
 
 //import { PortfolioCarousel } from './portfolio-carousel.js';
 
-const renderer = new THREE.WebGLRenderer({
-    canvas: document.getElementById('three-canvas'),
-    antialias: true,
-    alpha: true
+window.onload = function () {
+    const renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById('three-canvas'),
+        antialias: true,
+        alpha: true
 
-});
+    });
+}
 
 let aspect = window.innerWidth / window.innerHeight;
 
