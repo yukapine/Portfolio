@@ -115,7 +115,7 @@ window.PortfolioCarousel = PortfolioCarousel;
 class ContentManager {
     constructor() {
       this.carousel = new window.PortfolioCarousel();
-      this.threeScene = scene;
+      //this.threeScene = scene;
       this.currentSection = 'main';
       
       this.setupNavigation();
