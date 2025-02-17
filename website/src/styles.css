@@ -197,8 +197,8 @@ position: relative;
 
 .item {
     position: absolute;
-    width: 192px;
-    height: 256px;
+    /* width: 192px;
+    height: 256px; */
     transform-style: preserve-3d;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     -webkit-user-select: none; /* Safari */        
