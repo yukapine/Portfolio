@@ -29,8 +29,10 @@ class PortfolioCarousel {
         const itemElement = document.createElement('div');
         itemElement.className = 'item';
         let height, width = this.getImageSize(item.image);
-        itemElement.style.height = `${height}px`;
-        itemElement.style.width = `${width}px`;
+        aspect = width / height;
+        //itemElement.style.height = `${height}px`;
+        //itemElement.style.width = `${width}px`;
+        item.element.style.aspect = `${aspect}px`;
         
         itemElement.innerHTML = `
           <div class="card">
