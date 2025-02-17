@@ -32,7 +32,7 @@ class PortfolioCarousel {
         aspect = width / height;
         //itemElement.style.height = `${height}px`;
         //itemElement.style.width = `${width}px`;
-        item.element.style.aspect = `${aspect}px`;
+        itemElement.style.aspectRatio = `${aspect}px`;
         
         itemElement.innerHTML = `
           <div class="card">
