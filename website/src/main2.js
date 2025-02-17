@@ -37,7 +37,6 @@ class PortfolioCarousel {
         itemElement.innerHTML = `
           <div class="card">
             <img src="${item.image}" alt="${item.title}">
-            <div class="card-title">${item.title}</div>
           </div>
         `;
         
