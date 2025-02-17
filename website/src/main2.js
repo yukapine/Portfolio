@@ -32,11 +32,6 @@ class PortfolioCarousel {
       this.items.forEach((item, index) => {
         const itemElement = document.createElement('div');
         itemElement.className = 'item';
-        //let height, width = this.getImageSize(item.image);
-        //let aspect = width / height;
-        //itemElement.style.height = `${height}px`;
-        //itemElement.style.width = `${width}px`;
-        //itemElement.style.aspectRatio = `${width} / ${height}`;
         
         itemElement.innerHTML = `
           <div class="card">
@@ -50,17 +45,12 @@ class PortfolioCarousel {
       this.updatePositions();
     }
 
-    getImageSize(src) {
-      var img = new Image();
-      img.src = src;
-      return img.height, img.width
-    }
-
     setupEventListeners() {
       this.container.addEventListener('mousedown', this.handleMouseDown.bind(this));
       this.container.addEventListener('mousemove', this.handleMouseMove.bind(this));
       this.container.addEventListener('mouseup', this.handleMouseUp.bind(this));
       this.container.addEventListener('mouseleave', this.handleMouseUp.bind(this));
+      this.container.addEventListener('wheel', this.handleScrollWheel.bind(this));
     }
 
     handleMouseDown(e) {
@@ -81,6 +71,16 @@ class PortfolioCarousel {
       this.updatePositions();
     }
 
+    handleScrollWheel(e) {
+      var scrollSensitivity = 10;
+      if (e.deltaY > 0) {
+        this.rotation += scrollSensitivity;
+      } else {
+        this.rotation -= scrollSensitivity;
+      }
+      this.updatePositions();
+    }
+
     handleMouseUp() {
       this.isDragging = false;
       this.container.classList.remove('dragging');
@@ -89,7 +89,7 @@ class PortfolioCarousel {
     updatePositions() {
       if (!this.isActive) return;
       
-      const radius = 400;
+      const radius = 500;
       const itemElements = this.carousel.querySelectorAll('.item');
       
       itemElements.forEach((element, index) => {
@@ -106,7 +106,7 @@ class PortfolioCarousel {
           translateZ(${z}px)
           rotateY(${itemRotation}deg)
         `;
-        element.style.opacity = Math.max(0.3, opacity);
+        element.style.opacity = Math.max(0.05, opacity);
         element.style.zIndex = Math.floor((z + radius) * 10);
       });
     }
@@ -148,11 +148,8 @@ class ContentManager {
     switchToSection(section) {
       if (section === this.currentSection) return;
 
-      // Update navigation
       this.currentSection = section;
       this.updateNavigation();
-
-      // Handle content visibility
       const mainContent = document.getElementById('main-content');
       const portfolioContent = document.getElementById('portfolio-content');
 
