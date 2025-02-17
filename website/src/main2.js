@@ -14,7 +14,11 @@ class PortfolioCarousel {
         { id: 5, title: '', image: 'website/portfolio/5.jpeg' },
         { id: 6, title: '', image: 'website/portfolio/6.jpeg' },
         { id: 7, title: '', image: 'website/portfolio/7.jpeg' },
-        { id: 8, title: '', image: 'website/portfolio/8.jpeg' }
+        { id: 8, title: '', image: 'website/portfolio/8.jpeg' },
+        { id: 9, title: '', image: 'website/portfolio/9.jpeg' },
+        { id: 10, title: '', image: 'website/portfolio/10.jpeg' },
+        { id: 11, title: '', image: 'website/portfolio/11.jpeg' },
+        { id: 12, title: '', image: 'website/portfolio/12.jpeg' }
       ];
 
       this.container = document.querySelector('.carousel-container');
