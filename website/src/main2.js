@@ -28,10 +28,12 @@ class PortfolioCarousel {
       this.items.forEach((item, index) => {
         const itemElement = document.createElement('div');
         itemElement.className = 'item';
+        let height, width = this.getImageSize(item.image);
         
         itemElement.innerHTML = `
           <div class="card">
-            <img src="${item.image}" alt="${item.title}">
+            <img src="${item.image}" alt="${item.title}"
+              style="height:${height};width:${width};">
             <div class="card-title">${item.title}</div>
           </div>
         `;
@@ -40,6 +42,12 @@ class PortfolioCarousel {
       });
 
       this.updatePositions();
+    }
+
+    getImageSize(src) {
+      var img = new Image();
+      img.src = src;
+      return img.height, img.width
     }
 
     setupEventListeners() {
