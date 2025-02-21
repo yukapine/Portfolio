@@ -315,6 +315,11 @@ position: relative;
     pointer-events: none;
 }
 
+.circle.one {
+    top: 45vw;  
+    right: -15vw;
+}
+
 .circle.two {
     top: 45vw;  
     right: 85vw; 
