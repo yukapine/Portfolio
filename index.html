@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Jackson Pine</title>
@@ -14,91 +14,282 @@
 
         
     </head>
-    <body>
-        <div class="crt"></div>
+<body>
+    <div class="crt"></div>
+    <div class="blur-overlay"></div>
 
-        <div class="circle one"></div>
-        <div class="circle two"></div>
-        <div class="circle three"></div>
-        <div class="circle four"></div>
-        <div id="curved-corner-topleft"></div>
-        <div id="curved-corner-bottomleft"></div>
-        
-        <div></div>
-        
-
-        <div class="nav-container">
-            <nav class="nav">
-                <div class="nav-link active" data-section="main">ABOUT ME</div>
-                <div class="nav-link" data-section="portfolio">PORTFOLIO</div>
-            </nav>
+    <img src="img1.png" class="item one"></img>
+    <img src="img2.png" class="item two"></img>
+    <img src="img3.png" class="item three"></img>
+    
+    <header>
+        <div id="corner-container">
+            <div id="curved-corner-topleft"></div>
+            <div id="curved-corner-bottomleft"></div>
         </div>
-        <div class="header">
-            <div class="wavy">
-                <span style="--i:1">J</span>
-                <span style="--i:2">A</span>
-                <span style="--i:3">C</span>
-                <span style="--i:4">K</span>
-                <span style="--i:5">S</span>
-                <span style="--i:6">O</span>
-                <span style="--i:7">N</span>
-                <span style="--i:7">&nbsp;</span>
-                <span style="--i:8">R</span>
-                <span style="--i:8">&nbsp;</span>
-                <span style="--i:9">P</span>
-                <span style="--i:10">I</span>
-                <span style="--i:11">N</span>
-                <span style="--i:12">E</span>
-                
-
-            </div>
-
-            <div class="square"></div>
-
-            
-            <div class="contact">
-                <span class="email2">pine22@bu.edu</span> | 
-                <span class="phone">(510) 882-9740</span>
-            </div>
-
-            
-
-            <div class="links">
-                <a href="https://www.linkedin.com/in/jackson-pine-378192274" target="_blank">LinkedIn</a>
-                <a href="https://github.com/yukapine" target="_blank">GitHub</a>
-                <a href="https://www.fabriohub.com/" target="_blank">Fabrio Hub</a>
-            </div>
-
-            
-
-        </div>
-
-        <section id="portfolio-content" class="content-section hidden">
-            <div class="carousel-container">
-                <div class="carousel"></div>
-            </div>
-        </section>
-
-        <section id="main-content" class="content-section">
-            <canvas id="three-canvas"></canvas>
-            <div id="about" class="about-container card">
-                <h1 class="about-title">About Me</h1>
-                <div class="about-content">
-                    <p class="about-paragraph">
-                        Hello! My name is Jackson Pine and I am a Junior Computer Science Major at Boston University. My work includes software development, graphic design, illustration, and 3D modelling/sculpting. 
-                        In my free time I work on creating interactive art pieces that allow for novel forms of engagement. I try to approach
-                        all my projects with a sense of exploration.
-                    </p>
-                    <p class="about-paragraph">
-                        While my main goal is to work in software engineering, my appreciation for the physical world is just as strong as my attachment to digital creation.
-                        I find most of my inspiration in product, fashion, architectural, and furniture design, and I like to incorporate aspects of each into my work. If you're looking
-                        for an extra dimension of creativity and engagement in your projects, I am currently looking for work. 
-
-                    </p>
+        
+        <div class="header-container">
+            <div class="circle-one"></div>
+            <div class="name-container">
+                <img class="logo" src="Logo444.png" alt="Jackson Pine Logo">
+                <div class="wavy">
+                    <span style="--i:1">
+                        
+                    </span>
+                    <span style="--i:1">J</span>
+                    <span style="--i:2">A</span>
+                    <span style="--i:3">C</span>
+                    <span style="--i:4">K</span>
+                    <span style="--i:5">S</span>
+                    <span style="--i:6">O</span>
+                    <span style="--i:7">N</span>
+                    <span style="--i:7">&nbsp;</span>
+                    <span style="--i:8">R</span>
+                    <span style="--i:8">.</span>
+                    <span style="--i:8">&nbsp;</span>
+                    <span style="--i:9">P</span>
+                    <span style="--i:10">I</span>
+                    <span style="--i:11">N</span>
+                    <span style="--i:12">E</span>
                 </div>
             </div>
-        </section>
+            <div class="contact-info">
+                <span class="email">pine22@bu.edu</span>
+                <span class="phone">(510) 882-9740</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <span id="about" class="progress-content">ABOUT ME</span>
+                    <span id="projects" class="progress-content">PROJECTS</span>
+                    <span id="portfolio" class="progress-content">PORTFOLIO</span>
+                </div>
+            </div>
+        </div>
+    </header>
     
-    <script src="website/src/main2.js"></script>
-    </body>
+    <section id="about" class="section">
+        <div class="about-container">
+            <h1 class="about-title section-header" data-value="0">About Me</h1>
+            <div class="about-content">
+
+                <section class="about">
+                    <p class="about-paragraph" style="margin-bottom: 0.1rem;">
+                        Hello! My name is <strong>Jackson Pine</strong>, and I am a Junior Computer Science Major at 
+                        <img src="website/portfolio/BU.jpeg" class="bu-logo">
+                    </p>
+                
+                    <p class="about-paragraph">
+                        I am also a software developer and graphic designer with an interest in making optimized, intuitive, and engaging software.
+                        My skills includes:
+                    </p>
+                
+                    <ul class="about-list">
+                        <li>Software / Web Development</li>
+                        <li>Graphic Design</li>
+                        <li>Digital Illustration</li>
+                        <li>3D Modeling / Sculpting</li>
+                    </ul>
+                
+                    <p class="about-paragraph">
+                        In my free time, I work on interactive art pieces that encourage new forms of engagement.
+                    </p>
+                
+                    <p class="about-paragraph">
+                        While my goal is to work in software engineering, I always make time for design work. I take inspiration from product, 
+                        fashion, architecture, and furniture design, incorporating elements of each into my projects. If you're looking for an 
+                        extra layer of creativity and engagement in your product, <strong>I am currently looking for work.</strong> 
+                    </p>
+                
+                    <p class="about-paragraph">My less techy passions include:</p>
+                
+                    <ul class="about-list passions">
+                        <li>Movie Soundtracks</li>
+                        <li>Robotics</li>
+                        <li>Furniture Design</li>
+                        <li>1970s Library Architecture</li>
+                        <li>Vintage Miu Miu Boots</li>
+                        <li>Ringer Tees</li>
+                        <li>Concrete</li>
+                        <li>The Movie "Eternal Sunshine of the Spotless Mind" starring Kate Winslet</li>
+                        <li>Font Kerning</li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="portfolio" class="section" >
+        <h2 class="project-title section-header" data-value="1">Projects</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <div class="project-header">
+                        <h3>Department of Nanorobotic Research</h3>
+                        <p>A webgame about parasitic nanotech. Built with Javascript, HTML, and CSS. </p>
+                    </div>
+                    <div class="image-container">
+                        <img class="project-main-image" src="website/portfolio/main.png"></img>  
+                    </div>
+                    <div class="sub-image-container">
+                        <img class="project-sub-image" src="website/portfolio/Gun_Icon.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/Protein_Icon.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/P_icon.jpeg"></img>
+                        <img class="project-sub-image" src="website/portfolio/Body.png"></img>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="project-header">
+                        <h3>Project 2</h3>
+                        <p>Coming Soon...</p>
+                    </div>
+                    <div class="image-container">
+                        <img class="project-main-image" src="website/portfolio/placeholder.png"></img>
+
+                    </div>
+                    <div class="sub-image-container">
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="project-header">
+                        <h3>Project 3</h3>
+                        <p>Coming Later...</p>
+                    </div>
+                    <div class="image-container">
+                        <img class="project-main-image" src="website/portfolio/placeholder.png"></img>
+                    </div>
+                    <div class="sub-image-container">
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                        <img class="project-sub-image" src="website/portfolio/placeholder.png"></img>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-navigation">
+                <div class="carousel-dot active"></div>
+                <div class="carousel-dot"></div>
+                <div class="carousel-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio2" class="section" >
+        <h2 class="portfolio-title section-header" data-value="2">PORTFOLIO</h2>
+        <div class="portfolio-content-container">
+
+        </div>
+        <div class="portfolio-navigation">
+            <div class="portfolio-dot active"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+            <div class="portfolio-dot"></div>
+        </div>
+
+    </section>
+    
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/jackson-pine-378192274" target="_blank">LinkedIn</a>
+            <a href="https://github.com/yukapine" target="_blank">GitHub</a>
+            <a href="https://www.fabriohub.com/" target="_blank">Fabrio Hub</a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Jackson Pine. All rights reserved.
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const p_dots = document.querySelectorAll('.portfolio-dot');
+            const items = document.querySelectorAll('.carousel-item');
+            const portfolioElem = document.querySelector('.portfolio-content-container');
+            let currentIndex = 0;
+            let p_currentIndex = 0;
+            
+            
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+
+            p_dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    p_currentIndex = index+1;
+                    scrollPortfolio();
+                });
+            });
+            
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            function scrollPortfolio() {
+                selected = document.getElementById(p_currentIndex.toString());
+                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+                p_dots.forEach((dot, index) => {
+                    console.log(p_currentIndex, index);
+                    dot.classList.toggle('active', index+1 === p_currentIndex);
+                });
+            }
+           
+            function loadPortfolio() {
+                console.log('work');
+                const imageContainer = document.querySelector('.portfolio-content-container');
+                const portfolioImages = [];
+                for (let i=1;i<13;i++){
+                    let parent = document.createElement('div');
+                    let elem = document.createElement("img");
+                    elem.id = i;
+                    elem.classList.add("portfolio-image");
+                    parent.classList.add("portfolio-image-container");
+                    let _img = new Image();
+                    imageContainer.appendChild(parent);
+                    parent.appendChild(elem);
+                    _img.src = `website/portfolio/${i}.jpeg`;
+                    console.log(_img.src);
+                    elem.src = _img.src;
+                    portfolioImages.push(elem);
+                }
+            }
+            loadPortfolio();
+        });
+        
+        document.addEventListener('scroll', function() {
+            const progressItems = document.querySelectorAll('.progress-content');
+            
+            const sections = document.querySelectorAll('.section-header');
+            let scroll = window.scrollY;
+            let selectedSection = 0;
+            
+            sections.forEach((section) => {
+                let b = section.getBoundingClientRect();
+                if (b.top < window.innerHeight && b.bottom >= 0) { 
+                    progressItems.forEach((item, index) => { item.classList.toggle('active', index === Number(section.dataset.value)); });
+                }
+            });
+
+        });
+    </script>
+</body>
 </html>
